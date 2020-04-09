@@ -1,4 +1,4 @@
-// TITLE: 					Assignment1
+// TITLE: 					Assignment2
 // COURSE: 					SENG2200
 // AUTHOR: 					Moosa Hassan
 // STUDENT NUMBER: 			3331532 
@@ -9,7 +9,8 @@ import java.lang.Math;
 
 public class Point{
 	// declaring coordinates and distance doubles
-	private final double xCoord, yCoord;
+	private double xCoord;
+	private double yCoord;
 	private double distance;
 
 	// constructor
@@ -20,12 +21,12 @@ public class Point{
 		// initiating distance variable
 		distance = 0.0;
 	}
-	
+
 	// method to calculate distance from point coordinates to (0, 0)
 	public double distanceFromOrigin() {
 		// pythagora's theorem
 		distance = Math.sqrt(Math.pow(Math.abs(xCoord), 2) + Math.pow(Math.abs(yCoord), 2));
-		
+
 		return distance;
 	}
 
@@ -34,13 +35,20 @@ public class Point{
 		return String.format("(%4.2f, %4.2f)", xCoord, yCoord);
 	}
 
-	// accessor method
-	public double getX(){
+	// accessor methods
+	public double getX() {
 		return xCoord;
 	}
 
-	// accessor method
-	public double getY(){
+	public double getY() {
 		return yCoord;
+	}
+
+	public void setX(double x) {
+		xCoord = x;
+	}
+
+	public void setY(double y) {
+		yCoord = y;
 	}
 }
