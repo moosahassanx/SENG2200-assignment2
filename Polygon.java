@@ -32,7 +32,7 @@ public class Polygon{
 		}
 
 		// final form
-		return "[" + pointLine + "]: " + String.format("%6.2f", calculateArea());
+		return "POLY=[" + pointLine + "]: " + String.format("%6.2f", calculateArea());
 	}
 
 	// calculate area of polygon using points given
