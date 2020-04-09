@@ -69,7 +69,19 @@ class PA2{
 					System.out.println(circleObject.toString());
 				}
 				else if(newText.equals("S")){
-					System.out.println("Semi-circle was detected");
+					
+					SemiCircle semiCircleObject = new SemiCircle();
+
+					final Point[] pointArray = new Point[2];
+
+					for(int i = 0; i < 2; i++){
+						double x = file.nextDouble();
+						double y = file.nextDouble();
+						pointArray[i] = new Point(x, y);
+						semiCircleObject.insertPoint(x, y);
+					}
+
+					System.out.println(semiCircleObject.toString());
 				}
 			}
 		} catch (final Exception e) {
@@ -101,10 +113,10 @@ S 4 3 8.0 6.0
 /*
 Unsorted list
 POLY=[(4.00 , 0.00)(4.00 , 8.10)(7.20 , 8.00)(7.00 , 3.00)(9.00 , 0.00)]: 27.66
-CIRC=[(5.10 , 4.00)) 3.20]: 32.17
-SEMI=[(4.00 , 3.00)(5.00 , 4.00)]: 39.27
+CIRC=[(5.10 , 4.00)) 3.20]: 5.62
+SEMI=[(4.00 , 3.00)(5.00 , 4.00)]: 3.51
 Sorted list
-SEMI=[(4.00 , 3.00)(5.00 , 4.00)]: 39.27
-CIRC=[(5.10 , 4.00)) 3.20]: 32.17
+SEMI=[(4.00 , 3.00)(5.00 , 4.00)]: 3.51
+CIRC=[(5.10 , 4.00)) 3.20]: 5.62
 POLY=[(4.00 , 0.00)(4.00 , 8.10)(7.20 , 8.00)(7.00 , 3.00)(9.00 , 0.00)]: 27.66
 */

@@ -20,8 +20,9 @@ public class Circle{
 
     public double originDistance(){
         // distance = (distance from origin of centre) - (radius of circle, which can be negative)
+        double originDistance = pointArray[0].distanceFromOrigin() - Math.abs(radius);
 
-        return 0;
+        return originDistance;
     }
 
     public String toString(){
