@@ -1,3 +1,3 @@
 public interface ComparePoly {
-	boolean ComesBefore(polygon o); // true if this < param
+	boolean ComesBefore(Polygon o); // true if this < param
 }
