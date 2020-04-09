@@ -2,13 +2,20 @@
 
 public class Circle{
 
+    private final Point[] pointArray = new Point[1];
+    private double radius;
 
+    public Circle(double r) {
+        radius = r;
+	}
 
-
-
-    public double calculateArea(){
+	public double calculateArea(){
         // method use area = pi * radius squared
-        return 0;
+        double area;
+
+        area = 3.14159265359 * (radius*radius);
+
+        return area;
     }
 
     public double originDistance(){
@@ -17,13 +24,16 @@ public class Circle{
         return 0;
     }
 
-    // example input data for a circle: C 5.1 4.0 3.2
     public String toString(){
         String line = "CIRC=";
 
-        // still needs to be coded properly
-        line = "[point0 r]: " + calculateArea();
+        line += "[" + pointArray[0].toString() + " " + radius + "]: " + String.format("%6.2f", calculateArea());
 
         return line;
+    }
+
+	public void insertPoint(final double xInput, final double yInput) {
+        // adding array of point as a new point
+		pointArray[0] = new Point(xInput, yInput);
     }
 }
