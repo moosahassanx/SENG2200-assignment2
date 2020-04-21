@@ -21,7 +21,7 @@ public class SemiCircle{
     public double calculateArea(){
         // area = (pi * radius squared) / 2
         double area = 3.1415926 * (calculateRadius()*calculateRadius());
-
+        
         return area/2;
     }
 
