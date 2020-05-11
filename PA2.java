@@ -88,8 +88,8 @@ class PA2{
 		System.out.println(unsortedList.toString());
 
 		// print sorted list
-		final MyPolygons sortedList = unsortedList.insertSort();
-		System.out.println(sortedList.toString());
+		//final MyPolygons sortedList = unsortedList.insertSort();
+		//System.out.println(sortedList.toString());
 	}
 }
 
