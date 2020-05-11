@@ -37,7 +37,7 @@ public class MyPolygons<T> {
     }
 
     // add items into the start of the list
-    public <T> void prepend(T shape) {
+    public <T extends PlanarShape> void prepend(T shape) {
         // same as append but with extra steps
         append(shape);
 
@@ -47,7 +47,7 @@ public class MyPolygons<T> {
     }
 
     // items into the end of the list (current item is the first in list),
-    public <T> void append(T shape) {
+    public <T extends PlanarShape> void append(T shape) {
         // create new temp node
         Node<T> temp = new Node<T>(shape);
 
@@ -90,8 +90,7 @@ public class MyPolygons<T> {
             if (sortedList.getLength() == 0) { // no nodes in sorted list
                 // simply add to the list
                 sortedList.append(sentinel.getData());
-            } else if (current.getData().comesBefore(sortedList.current.getData())) { // node being added is less than
-                                                                                      // the first node in the list
+            } else if (current.getData().comesBefore(sortedList.current.getData())) { // node being added is less than the first node in the list
                 // add before the current node int he list
                 sortedList.prepend(current.getData());
             } else {
@@ -100,9 +99,7 @@ public class MyPolygons<T> {
 
                 // iterate through what is currently in the sorted list
                 for (int j = 1; j < sortedList.getLength(); j++) {
-                    if (current.getData().comesBefore(sortedList.getCurrent())) { // node being added is less than the
-                                                                                  // node being tested in the sorted
-                                                                                  // list
+                    if (current.getData().comesBefore(sortedList.getCurrent())) { // node being added is less than the node being tested in the sorted list
                         break;
                     } else {
                         // iterate to next node
