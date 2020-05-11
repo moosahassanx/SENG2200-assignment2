@@ -5,10 +5,10 @@
 // DATE:                    22/03/2020 
 // DESCRIPTION:             linked list class to manipulate nodes
 
-public class MyPolygons{
+public class MyPolygons<T> {
     // declare private variables
-    private Node current;
-    private Node sentinel;
+    private Node<T> current;
+    private Node<T> sentinel;
     private int length;
     
     // the one with an object of polygon being passed through
@@ -37,9 +37,9 @@ public class MyPolygons{
     }
 
     // add items into the start of the list
-    public void prepend(Polygon polygonObject) {
+    public <T> void prepend(T shape) {
         // same as append but with extra steps
-        append(polygonObject);
+        append(shape);
 
         // (current item is the new first in list)
         sentinel = sentinel.getPrevious();
@@ -47,9 +47,9 @@ public class MyPolygons{
     }
 
     // items into the end of the list (current item is the first in list),
-    public void append(Polygon polygonObject) {
+    public <T> void append(T shape) {
         // create new temp node
-        Node temp = new Node(polygonObject);
+        Node<T> temp = new Node<T>(shape);
 
         if (length == 0) { // no nodes exist
             // sentinel becomes temp

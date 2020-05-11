@@ -22,9 +22,9 @@ class PA2{
 
 				// case1: scanner detects polygon
 				if (newText.equals("P")) {
-					final int numOfPoints = file.nextInt();						// next int is assumed to be number of points
+					final int numOfPoints = file.nextInt();							// next int is assumed to be number of points
 					final PlanarShape polygonObject = new Polygon(numOfPoints);		// new polygon object with number of points
-					final Point[] pointArray = new Point[numOfPoints];			//  declare point array and set number of elements as number of points
+					final Point[] pointArray = new Point[numOfPoints];				//  declare point array and set number of elements as number of points
 
 					int i = 1, j = 0;								// declare int variables and instantiate
 					while (i <= numOfPoints) {
@@ -93,7 +93,7 @@ class PA2{
 	}
 }
 
-/* CODE NEEDS TO READ
+/* INPUT
 P 5 4.0 0 4 8.1 7.2 8 7 3 9 0
 C 5.1 4.0 3.2
 S 4 3 5.0 4.0

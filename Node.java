@@ -5,22 +5,23 @@
 // DATE: 					22/03/2020 
 // DESCRIPTION: 			node class with next and previous pointers for linked list
 
-public class Node{
+public class Node<T> {
 	// declare private variables and objects
-	private Polygon data;
-	private Node next, previous;
+	private T data;
+	private T next;
+	private T previous;
 	private int position;
 
 	// constructor
-	public Node(final Polygon d) {
+	public Node(final T shape) {
 		// instantiate variables and objects
-		data = d;
+		data = shape;
 		next = null;
 		previous = null;
 	}
 
 	// mutator methods
-	public void setData(final Polygon d) {
+	public void setData(final T d) {
 		data = d;
 	}
 
@@ -28,16 +29,16 @@ public class Node{
 		position = pos;
 	}
 
-	public void setNext(final Node n) {
+	public void setNext(final T n) {
 		next = n;
 	}
 
-	public void setPrevious(final Node n) {
+	public void setPrevious(final T n) {
 		previous = n;
 	}
 
 	// accessor methods
-	public Polygon getData(){
+	public T getData() {
 		return data;
 	}
 
@@ -45,11 +46,11 @@ public class Node{
 		return position;
 	}
 
-	public Node getNext(){
+	public T getNext(){
 		return next;
 	}
 
-	public Node getPrevious(){
+	public T getPrevious(){
 		return previous;
 	}
 }
