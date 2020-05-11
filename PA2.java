@@ -23,7 +23,7 @@ class PA2{
 				// case1: scanner detects polygon
 				if (newText.equals("P")) {
 					final int numOfPoints = file.nextInt();						// next int is assumed to be number of points
-					final Polygon polygonObject = new Polygon(numOfPoints);		// new polygon object with number of points
+					final PlanarShape polygonObject = new Polygon(numOfPoints);		// new polygon object with number of points
 					final Point[] pointArray = new Point[numOfPoints];			//  declare point array and set number of elements as number of points
 
 					int i = 1, j = 0;								// declare int variables and instantiate
@@ -40,8 +40,9 @@ class PA2{
 						j++;
 						i++;
 					}
-
-					unsortedList.append(polygonObject);				// append polygon object into linked list
+					
+					System.out.println(polygonObject.toString());
+					//unsortedList.append(polygonObject);				// append polygon object into linked list
 				}
 
 				// case2: scanner detects circle
@@ -51,7 +52,7 @@ class PA2{
 					double r = file.nextDouble();			// radius
 
 					// create new circle using parameters
-					Circle circleObject  = new Circle(r);
+					PlanarShape circleObject  = new Circle(r);
 					circleObject.insertPoint(x, y);
 
 					// for testing
@@ -61,7 +62,7 @@ class PA2{
 				// case3: scanner detects semicircle
 				else if(newText.equals("S")){
 					// new semicircle
-					SemiCircle semiCircleObject = new SemiCircle();
+					PlanarShape semiCircleObject = new SemiCircle();
 					final Point[] pointArray = new Point[2];
 
 					// inserting points
