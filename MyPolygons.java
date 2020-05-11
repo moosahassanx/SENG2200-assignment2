@@ -75,6 +75,8 @@ public class MyPolygons<T> {
         length++;
     }
 
+    /*
+    // CAN FOCUS ON THIS AFTER EVERYTHING ELSE IS DONE!
     public MyPolygons insertSort() { // note to self: double check prepend()
         System.out.println("Sorted List:");
 
@@ -115,11 +117,12 @@ public class MyPolygons<T> {
         // return new list
         return sortedList;
     }
+    */
 
     // accessor method for position of node
-    public int getPosition(Node n) {
+    public int getPosition(Node<T> n) {
         // create temporary node
-        Node tempNode = sentinel;
+        Node<T> tempNode = sentinel;
 
         int i = 1;
         while (i <= length) {
