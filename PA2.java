@@ -42,7 +42,7 @@ class PA2{
 					}
 					
 					System.out.println(polygonObject.toString());
-					//unsortedList.append(polygonObject);				// append polygon object into linked list
+					unsortedList.append(polygonObject);				// append polygon object into linked list
 				}
 
 				// case2: scanner detects circle
