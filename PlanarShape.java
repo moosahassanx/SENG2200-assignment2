@@ -2,7 +2,7 @@
 
 public abstract class PlanarShape{
     // declare fields
-    // decalre non-abstract methods
+    // declare non-abstract methods
 
     abstract void draw();
     
@@ -13,6 +13,8 @@ public abstract class PlanarShape{
 
     // this will also be the basis for ordering (same thing as assignment1)
     public abstract double originDistance();
+
+	public abstract void insertPoint(double x, double y);
 
     // standard Comparable<T> interface are also meant to be implemented as you are comparing PlanarShape objects
 }
