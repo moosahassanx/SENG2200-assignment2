@@ -1,6 +1,6 @@
 // 2.7 Semi-Circle Class
 
-public class SemiCircle{
+public class SemiCircle extends PlanarShape{
 
     private final Point[] pointArray = new Point[4];
     private int pointCounter;
@@ -90,4 +90,11 @@ public class SemiCircle{
 	public double getLowestFromOrigin(){
 		return pointLowestFromOrigin;
 	}
+
+    // VSCODE GENERATED
+    @Override
+    void draw() {
+        // TODO Auto-generated method stub
+
+    }
 }

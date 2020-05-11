@@ -5,7 +5,7 @@
 // DATE: 					22/03/2020 
 // DESCRIPTION: 			creating polygon based on position of points
 
-public class Polygon{
+public class Polygon extends PlanarShape{
 	// variables and objects
 	private final Point[] pointArray;
 	private int pointCounter;
@@ -98,5 +98,19 @@ public class Polygon{
 	// accessor method
 	public double getLowestFromOrigin(){
 		return pointLowestFromOrigin;
+	}
+
+	// VSCODE GENERATED
+	@Override
+	void draw() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	// VSCODE GENERATED
+	@Override
+	public double originDistance() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

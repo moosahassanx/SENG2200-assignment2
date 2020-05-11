@@ -1,6 +1,6 @@
 // 2.6 Circle Class
 
-public class Circle{
+public class Circle extends PlanarShape{
 
     private final Point[] pointArray = new Point[1];
     private double radius;
@@ -36,5 +36,12 @@ public class Circle{
 	public void insertPoint(final double xInput, final double yInput) {
         // adding array of point as a new point
 		pointArray[0] = new Point(xInput, yInput);
+    }
+
+    // VSCODE GENERATED 
+    @Override
+    void draw() {
+        // TODO Auto-generated method stub
+
     }
 }
