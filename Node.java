@@ -7,13 +7,13 @@
 
 public class Node<T> {
 	// declare private variables and objects
-	private T data;
-	private T next;
-	private T previous;
+	private PlanarShape data;
+	private Node<T> next;
+	private Node<T> previous;
 	private int position;
 
 	// constructor
-	public Node(final T shape) {
+	public Node(final PlanarShape shape) {
 		// instantiate variables and objects
 		data = shape;
 		next = null;
@@ -21,7 +21,7 @@ public class Node<T> {
 	}
 
 	// mutator methods
-	public void setData(final T d) {
+	public void setData(final PlanarShape d) {
 		data = d;
 	}
 
@@ -29,16 +29,16 @@ public class Node<T> {
 		position = pos;
 	}
 
-	public void setNext(final T n) {
+	public void setNext(final Node<T> n) {
 		next = n;
 	}
 
-	public void setPrevious(final T n) {
+	public void setPrevious(final Node<T> n) {
 		previous = n;
 	}
 
 	// accessor methods
-	public T getData() {
+	public PlanarShape getData() {
 		return data;
 	}
 
@@ -46,11 +46,11 @@ public class Node<T> {
 		return position;
 	}
 
-	public T getNext(){
+	public Node<T> getNext() {
 		return next;
 	}
 
-	public T getPrevious(){
+	public Node<T> getPrevious() {
 		return previous;
 	}
 }
