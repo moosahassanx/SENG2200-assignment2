@@ -76,10 +76,10 @@ public class MyPolygons<T> {
     }
 
     // CAN FOCUS ON THIS AFTER EVERYTHING ELSE IS DONE!
-    public MyPolygons insertSort() { // note to self: double check prepend()
+    public MyPolygons<T> insertSort() { // note to self: double check prepend()
         System.out.println("Sorted List:");
 
-        MyPolygons sortedList = new MyPolygons();
+        MyPolygons<T> sortedList = new MyPolygons<T>();
 
         reset(); // set current as sentinel (first position) TOP LIST
 
@@ -94,7 +94,7 @@ public class MyPolygons<T> {
             } 
 
             // case2: node being added is less than the first node in the list
-            else if (current.getData().comesBefore(sortedList.current.getData())) { 
+            else if (current.getData().compareTo(sortedList.current.getData()) == 1) {                                                          // == 1 might not be right im just winging it
                 sortedList.prepend(current.getData());      // add before the current node int he list
             } 
             
@@ -105,7 +105,7 @@ public class MyPolygons<T> {
                 // iterate through what is currently in the sorted list
                 for (int j = 1; j < sortedList.getLength(); j++) {
                     // node being added is less than the node being tested in the sorted list
-                    if (current.getData().comesBefore(sortedList.getCurrent())) {
+                    if (current.getData().compareTo(sortedList.getCurrent()) == 1) {
                         break;
                     } 
 

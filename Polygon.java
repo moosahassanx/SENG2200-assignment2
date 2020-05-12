@@ -103,14 +103,8 @@ public class Polygon extends PlanarShape{
 	}
 
 	// accessor method
-	public double getLowestFromOrigin(){
+	public double originDistance(){
 		return pointLowestFromOrigin;
-	}
-
-	@Override
-	public int compareTo(PlanarShape o) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	
