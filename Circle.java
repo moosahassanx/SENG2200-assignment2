@@ -37,11 +37,4 @@ public class Circle extends PlanarShape{
         // adding array of point as a new point
 		pointArray[0] = new Point(xInput, yInput);
     }
-
-    // VSCODE GENERATED 
-    @Override
-    void draw() {
-        // TODO Auto-generated method stub
-
-    }
 }

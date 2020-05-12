@@ -1,22 +1,33 @@
 // 2.4 The Abstract Class - PlanarShape
 
-public abstract class PlanarShape {
-    // declare fields
-    // declare non-abstract methods
-
-	abstract void draw();
-    
+public abstract class PlanarShape implements Comparable<PlanarShape>{
     public abstract String toString();
-
-    // this will be the basis for ordering
     public abstract double calculateArea();
-
-    // this will also be the basis for ordering (same thing as assignment1)
     public abstract double originDistance();
-
+    public abstract double getLowestFromOrigin();
 	public abstract void insertPoint(double x, double y);
     
-    public interface comesBefore<T>(PlanarShape o);
+    public boolean compareTo(PlanarShape data){
+        double difference = (Math.abs(this.calculateArea() - data.calculateArea()));
 
-    // standard Comparable<T> interface are also meant to be implemented as you are comparing PlanarShape objects
+        // test difference in area
+        if(difference <= 0.001){
+            if(this.getLowestFromOrigin() < data.getLowestFromOrigin()){
+                return true;
+            }
+            return false;
+        } 
+        
+        // new shape area is greater than previous shape
+        else if(this.calculateArea() < data.calculateArea()){
+            return true;
+        }
+        
+        // new shape area is less than previous shape
+        else{
+            return false;
+        }
+    }
 }
+
+// standard Comparable<T> interface are also meant to be implemented as you are comparing PlanarShape objects

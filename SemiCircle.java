@@ -90,11 +90,4 @@ public class SemiCircle extends PlanarShape{
 	public double getLowestFromOrigin(){
 		return pointLowestFromOrigin;
 	}
-
-    // VSCODE GENERATED
-    @Override
-    void draw() {
-        // TODO Auto-generated method stub
-
-    }
 }

@@ -107,23 +107,11 @@ public class Polygon extends PlanarShape{
 		return pointLowestFromOrigin;
 	}
 
-	// VSCODE GENERATED
 	@Override
-	void draw() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	// VSCODE GENERATED
-	@Override
-	public double originDistance() {
+	public int compareTo(PlanarShape o) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
-	public boolean ComesBefore(PlanarShape o) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 }
