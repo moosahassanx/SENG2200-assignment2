@@ -37,7 +37,7 @@ public class MyPolygons<T> {
     }
 
     // add items into the start of the list
-    public <T extends PlanarShape> void prepend(T shape) {
+    public void prepend(PlanarShape shape) {
         // same as append but with extra steps
         append(shape);
 
@@ -47,7 +47,7 @@ public class MyPolygons<T> {
     }
 
     // items into the end of the list (current item is the first in list),
-    public <T extends PlanarShape> void append(T shape) {
+    public void append(PlanarShape shape) {
         // create new temp node
         Node<T> temp = new Node<T>(shape);
 
@@ -139,13 +139,16 @@ public class MyPolygons<T> {
 
     // • insert before a specified (current) item
     public void insert(Polygon polygonObject) {
-        if (length == 0) { // no nodes exist
+        // case1: no nodes exist
+        if (length == 0) {
             // follow append steps
             append(polygonObject);
             current = sentinel;
-        } else { // 1 or more nodes exist
+        } 
+        // case2: 1 or more nodes exist
+        else {
             // new temp node with data
-            Node tempNode = new Node(polygonObject);
+            Node<T> tempNode = new Node<T>(polygonObject);
 
             // setting previous and next of temp node
             tempNode.setPrevious(current.getPrevious());
@@ -168,7 +171,7 @@ public class MyPolygons<T> {
             sentinel = null;
         } else {
             // create a temporary node which will duplicate sentinel
-            Node temp = sentinel;
+            Node<T> temp = sentinel;
 
             // remove the original sentinel by tying the nodes before and after with each
             // other
