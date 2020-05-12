@@ -1,10 +1,10 @@
-// 2.4 The Abstract Class - PlanarShap
+// 2.4 The Abstract Class - PlanarShape
 
-public abstract class PlanarShape{
+public abstract class PlanarShape {
     // declare fields
     // declare non-abstract methods
 
-    abstract void draw();
+	abstract void draw();
     
     public abstract String toString();
 
@@ -15,6 +15,8 @@ public abstract class PlanarShape{
     public abstract double originDistance();
 
 	public abstract void insertPoint(double x, double y);
+    
+    public interface comesBefore<T>(PlanarShape o);
 
     // standard Comparable<T> interface are also meant to be implemented as you are comparing PlanarShape objects
 }

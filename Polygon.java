@@ -66,14 +66,21 @@ public class Polygon extends PlanarShape{
 		// formula for difference of areas as a percentage
 		final double difference = (Math.abs(this.calculateArea() - data.calculateArea()));
 
+		// case1: check for lowest from origin distance
 		if (difference <= 0.001){ 														// 0.1% or less difference
 			if (this.pointLowestFromOrigin < data.pointLowestFromOrigin){				// original polygon has point lower than new polygon with point close to origin
 				return true;
 			}
 			return false;
-		} else if(this.calculateArea() < data.calculateArea()){ // area of old polygon is less than new polygon area
+		} 
+		
+		// case2: old polygon has less area than new polygon (data)
+		else if(this.calculateArea() < data.calculateArea()){
 			return true;
-		} else{
+		} 
+		
+		// case3: old polygon has greater area than new polygon (data)
+		else{
 			return false;
 		}
 	}
@@ -112,5 +119,11 @@ public class Polygon extends PlanarShape{
 	public double originDistance() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public boolean ComesBefore(PlanarShape o) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

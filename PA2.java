@@ -41,7 +41,6 @@ class PA2{
 						i++;
 					}
 					
-					System.out.println(polygonObject.toString());
 					unsortedList.append(polygonObject);				// append polygon object into linked list
 				}
 
@@ -56,7 +55,7 @@ class PA2{
 					circleObject.insertPoint(x, y);
 
 					// for testing
-					System.out.println(circleObject.toString());
+					unsortedList.append(circleObject);				// append circle object into linked list
 				}
 
 				// case3: scanner detects semicircle
@@ -74,7 +73,7 @@ class PA2{
 					}
 
 					// for testing
-					System.out.println(semiCircleObject.toString());
+					unsortedList.append(semiCircleObject);				// append semicircle object into linked list
 				}
 			}
 		} catch (final Exception e) {
@@ -88,7 +87,7 @@ class PA2{
 		System.out.println(unsortedList.toString());
 
 		// print sorted list
-		//final MyPolygons sortedList = unsortedList.insertSort();
+		final MyPolygons sortedList = unsortedList.insertSort();
 		//System.out.println(sortedList.toString());
 	}
 }

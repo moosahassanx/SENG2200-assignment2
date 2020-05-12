@@ -10,7 +10,7 @@ public class MyPolygons<T> {
     private Node<T> current;
     private Node<T> sentinel;
     private int length;
-    
+
     // the one with an object of polygon being passed through
     public MyPolygons() {
         // instantiate private variables
@@ -75,7 +75,6 @@ public class MyPolygons<T> {
         length++;
     }
 
-    /*
     // CAN FOCUS ON THIS AFTER EVERYTHING ELSE IS DONE!
     public MyPolygons insertSort() { // note to self: double check prepend()
         System.out.println("Sorted List:");
@@ -89,35 +88,43 @@ public class MyPolygons<T> {
             // current = sentinel but for sorted list
             sortedList.reset();
 
-            if (sortedList.getLength() == 0) { // no nodes in sorted list
-                // simply add to the list
-                sortedList.append(sentinel.getData());
-            } else if (current.getData().comesBefore(sortedList.current.getData())) { // node being added is less than the first node in the list
-                // add before the current node int he list
-                sortedList.prepend(current.getData());
-            } else {
-                // go to node after current (sentinel)
-                sortedList.next();
+            // case1: no nodes in sorted list
+            if (sortedList.getLength() == 0) { 
+                sortedList.append(sentinel.getData());      // simply add to the list
+            } 
+
+            // case2: node being added is less than the first node in the list
+            else if (current.getData().comesBefore(sortedList.current.getData())) { 
+                sortedList.prepend(current.getData());      // add before the current node int he list
+            } 
+            
+            //case3:
+            else {
+                sortedList.next();  // go to node after current (sentinel)
 
                 // iterate through what is currently in the sorted list
                 for (int j = 1; j < sortedList.getLength(); j++) {
-                    if (current.getData().comesBefore(sortedList.getCurrent())) { // node being added is less than the node being tested in the sorted list
+                    // node being added is less than the node being tested in the sorted list
+                    if (current.getData().comesBefore(sortedList.getCurrent())) {
                         break;
-                    } else {
-                        // iterate to next node
-                        sortedList.next();
+                    } 
+
+                    else {
+                        sortedList.next();      // iterate to next node
                     }
                 }
+
                 // insert before the node being tested
                 sortedList.insert(current.getData());
             }
+
             // test next node
             next();
         }
+        
         // return new list
         return sortedList;
     }
-    */
 
     // accessor method for position of node
     public int getPosition(Node<T> n) {
@@ -138,13 +145,15 @@ public class MyPolygons<T> {
     }
 
     // • insert before a specified (current) item
-    public void insert(Polygon polygonObject) {
+    public void insert(PlanarShape polygonObject) {
+
         // case1: no nodes exist
         if (length == 0) {
             // follow append steps
             append(polygonObject);
             current = sentinel;
-        } 
+        }
+
         // case2: 1 or more nodes exist
         else {
             // new temp node with data
@@ -162,19 +171,24 @@ public class MyPolygons<T> {
     }
 
     // • take (then remove) an item from the head of the list
-    public Polygon remove() {
+    public PlanarShape remove() {
         current = sentinel.getNext();
 
-        if (length == 0) { // if there are no nodes in the linked list
+        // case1: there are no nodes in the linked list
+        if (length == 0) {
             // do nothing
-        } else if (length == 1) { // if there is 1 node in the linked list
+        }
+
+        // case2: there is 1 node in the linked list
+        else if (length == 1) {
             sentinel = null;
-        } else {
-            // create a temporary node which will duplicate sentinel
+        }
+
+        // create a temporary node which will duplicate sentinel
+        else {
             Node<T> temp = sentinel;
 
-            // remove the original sentinel by tying the nodes before and after with each
-            // other
+            // remove the original sentinel by tying the nodes before and after with each other
             sentinel.getNext().setPrevious(sentinel.getPrevious());
             sentinel.getPrevious().setNext(sentinel.getNext());
 
@@ -185,6 +199,7 @@ public class MyPolygons<T> {
             length--;
             return temp.getData();
         }
+
         // returning current node
         return current.getData();
     }
@@ -200,11 +215,11 @@ public class MyPolygons<T> {
     }
 
     // accessor methods
-    public Polygon getCurrent(){
+    public PlanarShape getCurrent() {
         return current.getData();
     }
 
-    public Polygon getSentinel(){
+    public PlanarShape getSentinel() {
         return sentinel.getData();
     }
 
