@@ -1,0 +1,235 @@
+import java.util.Iterator;
+
+// TITLE:                   Assignment1
+// COURSE:                  SENG2200
+// AUTHOR:                  Moosa Hassan
+// STUDENT NUMBER:          3331532 
+// DATE:                    22/03/2020 
+// DESCRIPTION:             linked list class to manipulate nodes
+
+public class LinkedList<T> implements Iterable<T> {
+    // declare private variables
+    private Node<T> current;
+    private Node<T> sentinel;
+    private int length;
+    private class SimpleIterator implements Iterator<T>;
+
+    // the one with an object of polygon being passed through
+    public LinkedList() {
+        // instantiate private variables
+        current = null;
+        sentinel = null;
+        length = 0;
+    }
+
+    // return list of polygons as a string
+    public String toString() {
+        // declare and instantiate string
+        String printer = "";
+
+        // loop for each node
+        for (int i = 0; i < length; i++) {
+            // add string to polygon
+            printer = printer + current.getData().toString() + "\n";
+            // iterate to next node
+            next();
+        }
+
+        // return string
+        return printer;
+    }
+
+    // add items into the start of the list
+    public void prepend(PlanarShape shape) {
+        // same as append but with extra steps
+        append(shape);
+
+        // (current item is the new first in list)
+        sentinel = sentinel.getPrevious();
+        reset();
+    }
+
+    // items into the end of the list (current item is the first in list),
+    public void append(PlanarShape shape) {
+        // create new temp node
+        Node<T> temp = new Node<T>(shape);
+
+        if (length == 0) { // no nodes exist
+            // sentinel becomes temp
+            sentinel = temp;
+
+            // setting next and previous for sentinel
+            sentinel.setNext(sentinel);
+            sentinel.setPrevious(sentinel);
+
+            // current = sentinel
+            reset();
+        } else { // 1 or more nodes exist
+            temp.setNext(sentinel);
+            temp.setPrevious(sentinel.getPrevious());
+
+            // setting next of node before current
+            sentinel.getPrevious().setNext(temp);
+            sentinel.setPrevious(temp);
+
+            // current = sentinel
+            reset();
+        }
+        length++;
+    }
+
+    // CAN FOCUS ON THIS AFTER EVERYTHING ELSE IS DONE!
+    public LinkedList<T> insertSort() { // note to self: double check prepend()
+        System.out.println("Sorted List:");
+
+        LinkedList<T> sortedList = new LinkedList<T>();
+
+        reset(); // set current as sentinel (first position) TOP LIST
+
+        // iterate through unsorted list
+        for (int i = 0; i < length; i++) {
+            // current = sentinel but for sorted list
+            sortedList.reset();
+
+            // case1: no nodes in sorted list
+            if (sortedList.getLength() == 0) {
+                sortedList.append(sentinel.getData()); // simply add to the list
+            }
+
+            // case2: node being added is less than the first node in the list
+            else if (current.getData().compareTo(sortedList.current.getData()) == 1) { // == 1 might not be right im
+                                                                                       // just winging it
+                sortedList.prepend(current.getData()); // add before the current node int he list
+            }
+
+            // case3:
+            else {
+                sortedList.next(); // go to node after current (sentinel)
+
+                // iterate through what is currently in the sorted list
+                for (int j = 1; j < sortedList.getLength(); j++) {
+                    // node being added is less than the node being tested in the sorted list
+                    if (current.getData().compareTo(sortedList.getCurrent()) == 1) {
+                        break;
+                    }
+
+                    else {
+                        sortedList.next(); // iterate to next node
+                    }
+                }
+
+                // insert before the node being tested
+                sortedList.insert(current.getData());
+            }
+
+            // test next node
+            next();
+        }
+
+        // return new list
+        return sortedList;
+    }
+
+    // accessor method for position of node
+    public int getPosition(Node<T> n) {
+        // create temporary node
+        Node<T> tempNode = sentinel;
+
+        int i = 1;
+        while (i <= length) {
+            if (tempNode == n) { // sentinel matches the input node
+                return i;
+            } else {
+                // iterate to next node
+                tempNode = tempNode.getNext();
+            }
+            i++;
+        }
+        return 1;
+    }
+
+    // • insert before a specified (current) item
+    public void insert(PlanarShape polygonObject) {
+
+        // case1: no nodes exist
+        if (length == 0) {
+            // follow append steps
+            append(polygonObject);
+            current = sentinel;
+        }
+
+        // case2: 1 or more nodes exist
+        else {
+            // new temp node with data
+            Node<T> tempNode = new Node<T>(polygonObject);
+
+            // setting previous and next of temp node
+            tempNode.setPrevious(current.getPrevious());
+            tempNode.setNext(current);
+
+            // setting next of node before current
+            current.getPrevious().setNext(tempNode);
+            current.setPrevious(tempNode);
+            length++;
+        }
+    }
+
+    // • take (then remove) an item from the head of the list
+    public PlanarShape remove() {
+        current = sentinel.getNext();
+
+        // case1: there are no nodes in the linked list
+        if (length == 0) {
+            // do nothing
+        }
+
+        // case2: there is 1 node in the linked list
+        else if (length == 1) {
+            sentinel = null;
+        }
+
+        // create a temporary node which will duplicate sentinel
+        else {
+            Node<T> temp = sentinel;
+
+            // remove the original sentinel by tying the nodes before and after with each
+            // other
+            sentinel.getNext().setPrevious(sentinel.getPrevious());
+            sentinel.getPrevious().setNext(sentinel.getNext());
+
+            // the node after sentinel becomes the new sentinel
+            sentinel = current;
+
+            // iteration and returning
+            length--;
+            return temp.getData();
+        }
+
+        // returning current node
+        return current.getData();
+    }
+
+    // set next node of current as current current
+    public void next() {
+        current = current.getNext();
+    }
+
+    // reset position of circular doubly linked list
+    public void reset() {
+        current = sentinel;
+    }
+
+    // accessor methods
+    public PlanarShape getCurrent() {
+        return current.getData();
+    }
+
+    public PlanarShape getSentinel() {
+        return sentinel.getData();
+    }
+
+    // accessor method
+    public int getLength() {
+        return length;
+    }
+}
