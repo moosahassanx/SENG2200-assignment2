@@ -1,8 +1,8 @@
 // TITLE: 					Assignment2
 // COURSE: 					SENG2200
 // AUTHOR: 					Moosa Hassan
-// STUDENT NUMBER: 			3331532 
-// DATE: 					22/03/2020 
+// STUDENT NUMBER: 			3331532
+// DATE: 					22/03/2020
 // DESCRIPTION: 			creating points and distance from origin to draw a polygon
 
 import java.lang.Math;
@@ -32,7 +32,7 @@ public class Point{
 
 	// return point as a string
 	public String toString() {
-		return String.format("(%4.2f, %4.2f)", xCoord, yCoord);
+		return String.format("(%4.2f , %4.2f)", xCoord, yCoord);
 	}
 
 	// accessor methods
