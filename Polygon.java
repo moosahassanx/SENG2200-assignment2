@@ -61,30 +61,6 @@ public class Polygon extends PlanarShape{
 		pointCounter++;
 	}
 
-	// interface - gives the function names. e.g. function killHitler() --> on file might stab the back, other file might shoot the head
-	public boolean comesBefore(final Polygon data){
-		// formula for difference of areas as a percentage
-		final double difference = (Math.abs(this.calculateArea() - data.calculateArea()));
-
-		// case1: check for lowest from origin distance
-		if (difference <= 0.001){ 														// 0.1% or less difference
-			if (this.pointLowestFromOrigin < data.pointLowestFromOrigin){				// original polygon has point lower than new polygon with point close to origin
-				return true;
-			}
-			return false;
-		} 
-		
-		// case2: old polygon has less area than new polygon (data)
-		else if(this.calculateArea() < data.calculateArea()){
-			return true;
-		} 
-		
-		// case3: old polygon has greater area than new polygon (data)
-		else{
-			return false;
-		}
-	}
-
 	// take point closest to origin and set as lowest distance of the polygon
 	public void testLowestFromOrigin(final int p){
 		// declaring and instantiating variable
