@@ -10,14 +10,17 @@ public abstract class PlanarShape implements Comparable<PlanarShape>{
         
         // case1: the new shape is smaller than the previous shape
         if(this.calculateArea() > data.calculateArea()){
-            return 1;
+            return -1;
+        }
+
+        // case2: the new shape is equal to the previous shape
+        else if(this.calculateArea() == data.calculateArea()){
+            return 0;
         }
         
-        // case2: the new shape is greater than the previous shape
+        // case3: the new shape is greater than the previous shape
         else{
-            return -1;
+            return 1;
         }
     }
 }
-
-// standard Comparable<T> interface are also meant to be implemented as you are comparing PlanarShape objects
