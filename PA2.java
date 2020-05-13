@@ -108,3 +108,10 @@ POLY=[(4.00 , 0.00)(4.00 , 8.10)(7.20 , 8.00)(7.00 , 3.00)(9.00 , 0.00)]: 27.66
 CIRC=[(5.10 , 4.00)) 3.20]: 32.17
 SEMI=[(4.00 , 3.00)(5.00 , 4.00)]: 39.27
 */
+
+/*
+semi circle x0 y0 x1 y1
+
+x0 & y0 represent the coordinates of where the centre of the circle is
+x1 % y1 represent the radius of the circle
+*/

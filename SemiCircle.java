@@ -13,14 +13,22 @@ public class SemiCircle extends PlanarShape{
 
     public double calculateRadius(){
         
-        double radius = Math.abs(pointArray[1].getX() - pointArray[0].getX()) - Math.abs(pointArray[1].getY() - pointArray[0].getY());
+        //double radius = Math.abs(pointArray[1].getX() - pointArray[0].getX()) - Math.abs(pointArray[1].getY() - pointArray[0].getY());
+
+        double xDistance = Math.abs(pointArray[1].getX() - pointArray[0].getX());
+        double yDistance = Math.abs(pointArray[1].getY() - pointArray[0].getY());
+
+        // pythagoras theorem
+        double radius = Math.pow((xDistance*xDistance) + (yDistance*yDistance), 0.5);
 
         return radius;
     }
 
     public double calculateArea(){
-        // area = (pi * radius squared) / 2
-        double area = 3.1415926 * (calculateRadius()*calculateRadius());
+        // area = (pi * radius^2) / 2
+
+        double radius = calculateRadius();
+        double area = 3.1415926 * (radius*radius);
         
         return area/2;
     }
@@ -67,18 +75,6 @@ public class SemiCircle extends PlanarShape{
         }
 
         return pointLowestFromOrigin;
-    }
-
-    public void setExtremityPoints(){
-        // x2 = x0 − |y0 − y1|        
-        pointArray[2].setX( pointArray[0].getX() - Math.abs(pointArray[0].getY() - pointArray[1].getY()) );
-        // y2 = y0 + |x0 − x1|
-        pointArray[2].setY( pointArray[0].getY() + Math.abs(pointArray[0].getX() - pointArray[1].getX()) );
-
-        // x3 = x0 + |y0 − y1|
-        pointArray[3].setX( pointArray[0].getX() + Math.abs(pointArray[0].getY() - pointArray[1].getY()) );
-        // y3 = y0 − |x0 − x1|
-        pointArray[3].setX( pointArray[0].getY() - Math.abs(pointArray[0].getX() - pointArray[1].getX()) );
     }
     
     // mutator method
