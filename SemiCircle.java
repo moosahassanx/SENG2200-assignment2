@@ -14,7 +14,7 @@ public class SemiCircle extends PlanarShape{
     public double calculateRadius(){
         
         //double radius = Math.abs(pointArray[1].getX() - pointArray[0].getX()) - Math.abs(pointArray[1].getY() - pointArray[0].getY());
-
+        
         double xDistance = Math.abs(pointArray[1].getX() - pointArray[0].getX());
         double yDistance = Math.abs(pointArray[1].getY() - pointArray[0].getY());
 
@@ -25,10 +25,9 @@ public class SemiCircle extends PlanarShape{
     }
 
     public double calculateArea(){
-        // area = (pi * radius^2) / 2
 
         double radius = calculateRadius();
-        double area = 3.1415926 * (radius*radius);
+        double area = Math.PI * (radius*radius);
         
         return area/2;
     }
@@ -36,19 +35,15 @@ public class SemiCircle extends PlanarShape{
     public String toString(){
         String line = "SEMI=";
 
-        line += "[" + pointArray[0].toString() + " " + pointArray[1].toString() + "]: " + calculateArea();
-
+        line += "[" + pointArray[0].toString() + " " + pointArray[1].toString() + "]: " + String.format("%6.2f", calculateArea());
         return line;
     }
 
 	// add point to the semiCircle
 	public void insertPoint(final double xInput, final double yInput) {
-		// adding array of point as a new point
-        pointArray[pointCounter] = new Point(xInput, yInput);
-        // test if new point is closer than previous point
-		testLowestFromOrigin(pointCounter);
-		// iterate number of points
-		pointCounter++;
+        pointArray[pointCounter] = new Point(xInput, yInput);               // adding array of point as a new point
+		testLowestFromOrigin(pointCounter);                                 // test if new point is closer than previous point
+		pointCounter++;                                                     // iterate number of points
     }
     
     // take point closest to origin and set as lowest distance of the polygon
