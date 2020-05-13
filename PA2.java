@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 class PA2{
 	public static void main(final String[] args) throws IOException {
-		final MyPolygons unsortedList = new MyPolygons();			// unsorted linked list
+		final LinkedList unsortedList = new LinkedList();			// unsorted linked list
 		final Scanner file = new Scanner(new File(args[0]));		// EXECUTE: java PA2 inputfile.txt
 		String newText = "";
 
@@ -87,7 +87,7 @@ class PA2{
 		System.out.println(unsortedList.toString());
 
 		// print sorted list
-		final MyPolygons sortedList = unsortedList.insertSort();
+		final LinkedList sortedList = unsortedList.insertSort();
 		System.out.println(sortedList.toString());
 	}
 }
