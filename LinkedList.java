@@ -1,4 +1,6 @@
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 // TITLE:                   Assignment1
 // COURSE:                  SENG2200
@@ -9,15 +11,48 @@ import java.util.Iterator;
 
 public class LinkedList<T> implements Iterable<T> {
     // declare private variables
-    private Node<T> current;
     private Node<T> sentinel;
     private int length;
-    private class SimpleIterator implements Iterator<T>;
+    private class SimpleIterator implements Iterator<T>{
+        private int expectedModCount;
+        private Node<T> current;
+
+        // the one with an object of polygon being passed through
+        public SimpleIterator() {
+            // instantiate private variables
+            expectedModCount = length;            // line needs to change
+            current = sentinel;
+        }
+
+        // no preconditions
+        public boolean hasNext() {
+            if(current.getNext() != sentinel){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        // 2 preconditions: returns true and ________
+        public T next() {
+
+            if(length != expectedModCount){
+               throw new ConcurrentModificationException("Cannot mutate in context of iterator");
+            }
+
+            if(!hasNext()){
+                throw new NoSuchElementException("There are no more elements");
+            }
+
+            current = current.getNext();
+            
+            return current.getData();
+        }
+    }
 
     // the one with an object of polygon being passed through
     public LinkedList() {
         // instantiate private variables
-        current = null;
         sentinel = null;
         length = 0;
     }
@@ -28,11 +63,14 @@ public class LinkedList<T> implements Iterable<T> {
         String printer = "";
 
         // loop for each node
-        for (int i = 0; i < length; i++) {
-            // add string to polygon
-            printer = printer + current.getData().toString() + "\n";
-            // iterate to next node
-            next();
+        Iterator<T> iterator = iterator();
+
+        printer += sentinel.getData().toString();
+        printer += "\n";
+
+        while(iterator.hasNext()){
+            printer += iterator.next().toString();
+            printer += "\n";
         }
 
         // return string
@@ -40,17 +78,16 @@ public class LinkedList<T> implements Iterable<T> {
     }
 
     // add items into the start of the list
-    public void prepend(PlanarShape shape) {
+    public void prepend(T shape) {
         // same as append but with extra steps
         append(shape);
 
         // (current item is the new first in list)
         sentinel = sentinel.getPrevious();
-        reset();
     }
 
     // items into the end of the list (current item is the first in list),
-    public void append(PlanarShape shape) {
+    public void append(T shape) {
         // create new temp node
         Node<T> temp = new Node<T>(shape);
 
@@ -62,8 +99,6 @@ public class LinkedList<T> implements Iterable<T> {
             sentinel.setNext(sentinel);
             sentinel.setPrevious(sentinel);
 
-            // current = sentinel
-            reset();
         } else { // 1 or more nodes exist
             temp.setNext(sentinel);
             temp.setPrevious(sentinel.getPrevious());
@@ -72,20 +107,22 @@ public class LinkedList<T> implements Iterable<T> {
             sentinel.getPrevious().setNext(temp);
             sentinel.setPrevious(temp);
 
-            // current = sentinel
-            reset();
         }
         length++;
     }
 
+    
     // CAN FOCUS ON THIS AFTER EVERYTHING ELSE IS DONE!
-    public LinkedList<T> insertSort() { // note to self: double check prepend()
+    public LinkedList<T> insertSort() {
         System.out.println("Sorted List:");
 
         LinkedList<T> sortedList = new LinkedList<T>();
 
-        reset(); // set current as sentinel (first position) TOP LIST
+        Node<T> current = sentinel;
 
+        // THIS WILL CAUSE NULL POINTER EXCEPTION BUT BRUH IM STILL WORKING ON IT
+
+        /*
         // iterate through unsorted list
         for (int i = 0; i < length; i++) {
             // current = sentinel but for sorted list
@@ -93,13 +130,12 @@ public class LinkedList<T> implements Iterable<T> {
 
             // case1: no nodes in sorted list
             if (sortedList.getLength() == 0) {
-                sortedList.append(sentinel.getData()); // simply add to the list
+                sortedList.append(sentinel.getData());      // simply add to the list
             }
 
             // case2: node being added is less than the first node in the list
-            else if (current.getData().compareTo(sortedList.current.getData()) == 1) { // == 1 might not be right im
-                                                                                       // just winging it
-                sortedList.prepend(current.getData()); // add before the current node int he list
+            else if (current.getData().compareTo(sortedList.current.getData()) == 1) {
+                sortedList.prepend(current.getData());                                      // add before the current node int he list
             }
 
             // case3:
@@ -125,58 +161,15 @@ public class LinkedList<T> implements Iterable<T> {
             // test next node
             next();
         }
+        */
 
         // return new list
         return sortedList;
     }
 
-    // accessor method for position of node
-    public int getPosition(Node<T> n) {
-        // create temporary node
-        Node<T> tempNode = sentinel;
-
-        int i = 1;
-        while (i <= length) {
-            if (tempNode == n) { // sentinel matches the input node
-                return i;
-            } else {
-                // iterate to next node
-                tempNode = tempNode.getNext();
-            }
-            i++;
-        }
-        return 1;
-    }
-
-    // • insert before a specified (current) item
-    public void insert(PlanarShape polygonObject) {
-
-        // case1: no nodes exist
-        if (length == 0) {
-            // follow append steps
-            append(polygonObject);
-            current = sentinel;
-        }
-
-        // case2: 1 or more nodes exist
-        else {
-            // new temp node with data
-            Node<T> tempNode = new Node<T>(polygonObject);
-
-            // setting previous and next of temp node
-            tempNode.setPrevious(current.getPrevious());
-            tempNode.setNext(current);
-
-            // setting next of node before current
-            current.getPrevious().setNext(tempNode);
-            current.setPrevious(tempNode);
-            length++;
-        }
-    }
-
     // • take (then remove) an item from the head of the list
-    public PlanarShape remove() {
-        current = sentinel.getNext();
+    public T remove() {
+        Node<T> current = sentinel.getNext();
 
         // case1: there are no nodes in the linked list
         if (length == 0) {
@@ -209,27 +202,18 @@ public class LinkedList<T> implements Iterable<T> {
         return current.getData();
     }
 
-    // set next node of current as current current
-    public void next() {
-        current = current.getNext();
-    }
-
-    // reset position of circular doubly linked list
-    public void reset() {
-        current = sentinel;
-    }
-
     // accessor methods
-    public PlanarShape getCurrent() {
-        return current.getData();
-    }
-
-    public PlanarShape getSentinel() {
+    public T getSentinel() {
         return sentinel.getData();
     }
 
     // accessor method
     public int getLength() {
         return length;
+    }
+
+    // iterator method
+    public Iterator<T> iterator() {
+        return new SimpleIterator();
     }
 }
