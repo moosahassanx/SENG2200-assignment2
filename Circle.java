@@ -1,4 +1,9 @@
-// 2.6 Circle Class
+// TITLE: 					Assignment1
+// COURSE: 					SENG2200
+// AUTHOR: 					Moosa Hassan
+// STUDENT NUMBER: 			3331532 
+// DATE: 					22/03/2020 
+// DESCRIPTION: 			creating circles using 3 input variables
 
 public class Circle extends PlanarShape{
 
@@ -6,7 +11,7 @@ public class Circle extends PlanarShape{
     private final Point[] pointArray = new Point[1];
     private double radius;
 
-    // constructor
+    // constructors
     public Circle(double r) {
         // instantiating
         radius = r;
@@ -37,5 +42,10 @@ public class Circle extends PlanarShape{
 	public void insertPoint(final double xInput, final double yInput) {
         // adding array of point as a new point
 		pointArray[0] = new Point(xInput, yInput);
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("Inside Circle::draw() method");
     }
 }

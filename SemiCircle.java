@@ -1,18 +1,20 @@
-// 2.7 Semi-Circle Class
+// TITLE: 					Assignment1
+// COURSE: 					SENG2200
+// AUTHOR: 					Moosa Hassan
+// STUDENT NUMBER: 			3331532 
+// DATE: 					22/03/2020 
+// DESCRIPTION: 			creating semicircles using 4 input variables
 
 public class SemiCircle extends PlanarShape{
 
     // declaring variables
     private final Point[] pointArray = new Point[2];
     private int pointCounter;
-    private double pointLowestFromOrigin;
-
-
+    
     // constructor
-    public SemiCircle(){
+    public SemiCircle() {
         // instantiating
         pointCounter = 0;
-        pointLowestFromOrigin = 0;
     }
 
     public double calculateRadius(){
@@ -67,7 +69,8 @@ public class SemiCircle extends PlanarShape{
         if(extremedity2.distanceFromOrigin() < minimumDistance){
             minimumDistance = extremedity2.distanceFromOrigin();
         }
-        
+
+        // case3: comparing 
         if(pointArray[0].distanceFromOrigin() < minimumDistance){
             minimumDistance = pointArray[0].distanceFromOrigin();
         }
@@ -77,5 +80,10 @@ public class SemiCircle extends PlanarShape{
         }
 
         return minimumDistance;
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("Inside SemiCircle::draw() method");
     }
 }

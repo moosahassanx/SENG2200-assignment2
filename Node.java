@@ -2,8 +2,8 @@
 // COURSE: 					SENG2200
 // AUTHOR: 					Moosa Hassan
 // STUDENT NUMBER: 			3331532 
-// DATE: 					22/03/2020 
-// DESCRIPTION: 			node class with next and previous pointers for linked list
+// DATE: 					15/05/2020 
+// DESCRIPTION: 			generic node class with next and previous pointers for linked list
 
 public class Node<T> {
 	// declare private variables and objects

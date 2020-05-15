@@ -12,7 +12,7 @@ public class Polygon extends PlanarShape{
 	private final int numOfPoints;
 	private double pointLowestFromOrigin;
 
-	// constructor
+	// constructors
 	public Polygon(final int points){
 		// instantiating variables and objects
 		pointArray = new Point[points];
@@ -85,5 +85,10 @@ public class Polygon extends PlanarShape{
 	// accessor method
 	public double originDistance(){
 		return pointLowestFromOrigin;
+	}
+
+	@Override
+	public void draw() {
+		System.out.println("Inside Polygon::draw() method");
 	}
 }

@@ -1,13 +1,14 @@
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 // TITLE:                   Assignment2
 // COURSE:                  SENG2200
 // AUTHOR:                  Moosa Hassan
 // STUDENT NUMBER:          3331532 
 // DATE:                    15/05/2020 
 // DESCRIPTION:             linked list class to manipulate nodes
+
+// importing java libraries (file scanner and string output)
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class LinkedList<T extends PlanarShape> implements Iterable<T> {
     // declare private variables

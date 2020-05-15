@@ -2,9 +2,10 @@
 // COURSE: 					SENG2200
 // AUTHOR: 					Moosa Hassan
 // STUDENT NUMBER: 			3331532
-// DATE: 					22/03/2020
+// DATE: 					15/05/2020 
 // DESCRIPTION: 			creating points and distance from origin to draw a polygon
 
+// importing java libraries (mathematics library)
 import java.lang.Math;
 
 public class Point{

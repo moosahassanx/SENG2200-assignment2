@@ -1,8 +1,14 @@
-// 2.4 The Abstract Class - PlanarShape
+// TITLE: 					Assignment2
+// COURSE: 					SENG2200
+// AUTHOR: 					Moosa Hassan
+// STUDENT NUMBER: 			3331532 
+// DATE: 					15/05/2020 
+// DESCRIPTION: 			abstract class which uses calls methods in terms of object type
 
 public abstract class PlanarShape implements Comparable<PlanarShape>{
     
     // common methods
+    public abstract void draw();
     public abstract String toString();
     public abstract double calculateArea();
     public abstract double originDistance();

@@ -14,6 +14,7 @@ class PA2{
 		final LinkedList<PlanarShape> unsortedList = new LinkedList<PlanarShape>();			// unsorted linked list
 		final LinkedList<PlanarShape> sortedList = new LinkedList<PlanarShape>();			// sorted linked list
 		final Scanner file = new Scanner(new File(args[0]));								// EXECUTE: java PA2 inputfile.txt
+		ShapeFactory shapeFactory = new ShapeFactory();										// shape factory
 		String newText = "";
 
 		try {
@@ -23,63 +24,80 @@ class PA2{
 
 				// case1: scanner detects polygon
 				if (newText.equals("P")) {
+					// creating line to send to shape factory
+					String sendText = "P";
 					final int numOfPoints = file.nextInt();							// next int is assumed to be number of points
-					final PlanarShape polygonObject = new Polygon(numOfPoints);		// new polygon object with number of points
-					final Point[] pointArray = new Point[numOfPoints];				//  declare point array and set number of elements as number of points
+					sendText += " ";
+					sendText += numOfPoints;
 
-					int i = 1, j = 0;								// declare int variables and instantiate
-					while (i <= numOfPoints) {
-						// x and y alternates
-						final double x = file.nextDouble();
-						final double y = file.nextDouble();
+					// concatenating onto sendText
+					int i = 1;
+					while(i <= numOfPoints){
+						double x = file.nextDouble();
+						sendText += " ";
+						sendText += x;
 
-						pointArray[j] = new Point(x, y);			// create new point element
-						
-						polygonObject.insertPoint(x, y);			// inserting those points
-						
-						// iterate after each loop
-						j++;
+						double y = file.nextDouble();
+						sendText += " ";
+						sendText += y;
 						i++;
 					}
 
-					// inserting into linked list
-					unsortedList.append(polygonObject);				// append polygon object into linked list
-					sortedList.insertOrdered(polygonObject);
+					// sending sendText string
+					PlanarShape shape = shapeFactory.getShape(sendText);
+					
+					// case: shape did not return properly
+					if(shape != null){
+						// adding onto lists
+						unsortedList.append(shape);
+						sortedList.insertOrdered(shape);
+					}
 				}
 
 				// case2: scanner detects circle
 				else if(newText.equals("C")){
+					// creating line to send to shape factory
+					String sendText = "C ";
 					double x = file.nextDouble();
 					double y = file.nextDouble();
 					double r = file.nextDouble();			// radius
+					
+					// concatenating string
+					sendText += x + " " + y + " " + r;
 
-					// create new circle using parameters
-					PlanarShape circleObject  = new Circle(r);
-					circleObject.insertPoint(x, y);
-
-					// inserting into linked list
-					unsortedList.append(circleObject);				// append circle object into linked list
-					sortedList.insertOrdered(circleObject);
+					// sending sendText string
+					PlanarShape shape = shapeFactory.getShape(sendText);
+					
+					// case: shape did not return properly
+					if(shape != null){
+						unsortedList.append(shape);
+						sortedList.insertOrdered(shape);
+					}
 				}
 
 				// case3: scanner detects semicircle
 				else if(newText.equals("S")){
-					// new semicircle
-					PlanarShape semiCircleObject = new SemiCircle();
+					// creating line to send to shape factory
+					String sendText = "S ";
 
-					// inserting points
-					for(int i = 0; i < 2; i++){
-						double x = file.nextDouble();
-						double y = file.nextDouble();
-						semiCircleObject.insertPoint(x, y);
+					// concatenating string
+					double x1 = file.nextDouble();
+					double y1 = file.nextDouble();
+					double x2 = file.nextDouble();
+					double y2 = file.nextDouble();
+					sendText += x1 + " " + y1 + " "+ x2 + " " + y2;
+
+					// sending senxText string
+					PlanarShape shape = shapeFactory.getShape(sendText);
+					
+					// case: shape did not return properly
+					if(shape != null){
+						unsortedList.append(shape);
+						sortedList.insertOrdered(shape);
 					}
-
-					// inserting into linked list
-					unsortedList.append(semiCircleObject);				// append semicircle object into linked list
-					sortedList.insertOrdered(semiCircleObject);
 				}
 			}
-		} 
+		}
 		// file reading error
 		catch (final Exception e) {
 			System.out.println("FILE ERROR: " + e);
