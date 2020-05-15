@@ -3,7 +3,7 @@
 public class SemiCircle extends PlanarShape{
 
     // declaring variables
-    private final Point[] pointArray = new Point[4];
+    private final Point[] pointArray = new Point[2];
     private int pointCounter;
     private double pointLowestFromOrigin;
 
@@ -47,53 +47,35 @@ public class SemiCircle extends PlanarShape{
 	// add point to the semiCircle
 	public void insertPoint(final double xInput, final double yInput) {
         pointArray[pointCounter] = new Point(xInput, yInput);               // adding array of point as a new point
-		testLowestFromOrigin(pointCounter);                                 // test if new point is closer than previous point
+		//testLowestFromOrigin(pointCounter);                                 // test if new point is closer than previous point
 		pointCounter++;                                                     // iterate number of points
-    }
-    
-    // take point closest to origin and set as lowest distance of the polygon
-	public void testLowestFromOrigin(final int p){
-		// declaring and instantiating variable
-		final int q = p - 1;
-
-        // case1: no existing points
-		if (p == 0){
-			setLowestFromOrigin(pointArray[p].distanceFromOrigin());        // first point will be set as point closest to origin of polygon
-        } 
-
-        // case2: comparing new point to previous point
-        else if (pointArray[p].distanceFromOrigin() < pointArray[q].distanceFromOrigin()){
-			setLowestFromOrigin(pointArray[p].distanceFromOrigin());        // set as point closest to origin of polygon
-		}
     }
 
     public double originDistance(){
-        
+        //setting extremdity points
+        Point extremedity1 = new Point(pointArray[0].getX() - Math.abs(pointArray[0].getY()-pointArray[1].getY()), pointArray[0].getY()+Math.abs(pointArray[0].getX()-pointArray[1].getX()));
+        Point extremedity2 = new Point(pointArray[0].getX() + Math.abs(pointArray[0].getY()-pointArray[1].getY()), pointArray[0].getY()-Math.abs(pointArray[0].getX()-pointArray[1].getX()));
+
+        double minimumDistance = Double.MAX_VALUE;
+
         // case1: comparing extremidity point to lowest from origin
-        if(pointArray[2].distanceFromOrigin() < pointLowestFromOrigin){
-            pointLowestFromOrigin = pointArray[2].distanceFromOrigin();
+        if(extremedity1.distanceFromOrigin() < minimumDistance){
+            minimumDistance = extremedity1.distanceFromOrigin();
         }
         
-        // case2: compariding extremedity point to lowest from origin
-        else if(pointArray[3].distanceFromOrigin() < pointLowestFromOrigin){
-            pointLowestFromOrigin = pointArray[3].distanceFromOrigin();
+        // case2: comparing extremedity point to lowest from origin
+        if(extremedity2.distanceFromOrigin() < minimumDistance){
+            minimumDistance = extremedity2.distanceFromOrigin();
         }
         
-        // case3L assume both extremedity points were not lowest from origin
-        else{
-            return pointLowestFromOrigin;
+        if(pointArray[0].distanceFromOrigin() < minimumDistance){
+            minimumDistance = pointArray[0].distanceFromOrigin();
         }
 
-        return pointLowestFromOrigin;
+        if(pointArray[1].distanceFromOrigin() < minimumDistance){
+            minimumDistance = pointArray[1].distanceFromOrigin();
+        }
+
+        return minimumDistance;
     }
-    
-    // mutator method
-	public void setLowestFromOrigin(final double s) {
-		pointLowestFromOrigin = s;
-    }
-    
-    // accessor method
-	public double getLowestFromOrigin(){
-		return pointLowestFromOrigin;
-	}
 }
