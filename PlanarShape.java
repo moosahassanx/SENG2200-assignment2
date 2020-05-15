@@ -10,19 +10,31 @@ public abstract class PlanarShape implements Comparable<PlanarShape>{
     
     @Override
     public int compareTo(PlanarShape data){
-        // TO DO: add ratio comparison
 
-        // case1: the new shape is smaller than the previous shape
+        if(data == null){
+            return 1;
+        }
+
+        // case1: difference in area between 2 shapes is less than 0.001
+        double difference = (Math.abs(this.calculateArea() - data.calculateArea()));
+        if(difference <= 0.001){
+            if(this.originDistance() < data.originDistance()){
+                return -1;
+            }
+            return 1;
+        }
+
+        // case2: the new shape is smaller than the previous shape
         if(this.calculateArea() > data.calculateArea()){
             return 1;
         }
 
-        // case2: the new shape is equal to the previous shape
+        // case3: the new shape is equal to the previous shape
         else if(this.calculateArea() == data.calculateArea()){
             return 0;
         }
         
-        // case3: the new shape is greater than the previous shape
+        // case4: assumed the new shape is greater than the previous shape
         else{
             return -1;
         }
