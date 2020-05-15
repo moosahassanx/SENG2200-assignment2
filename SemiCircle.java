@@ -2,21 +2,23 @@
 
 public class SemiCircle extends PlanarShape{
 
+    // declaring variables
     private final Point[] pointArray = new Point[4];
     private int pointCounter;
     private double pointLowestFromOrigin;
 
+
+    // constructor
     public SemiCircle(){
+        // instantiating
         pointCounter = 0;
         pointLowestFromOrigin = 0;
     }
 
     public double calculateRadius(){
         
-        //double radius = Math.abs(pointArray[1].getX() - pointArray[0].getX()) - Math.abs(pointArray[1].getY() - pointArray[0].getY());
-        
-        double xDistance = Math.abs(pointArray[1].getX() - pointArray[0].getX());
-        double yDistance = Math.abs(pointArray[1].getY() - pointArray[0].getY());
+        double xDistance = Math.abs(pointArray[1].getX() - pointArray[0].getX());       // distance between 2 x coordinates
+        double yDistance = Math.abs(pointArray[1].getY() - pointArray[0].getY());       // distance between 2 y coordinates
 
         // pythagoras theorem
         double radius = Math.pow((xDistance*xDistance) + (yDistance*yDistance), 0.5);
@@ -26,16 +28,19 @@ public class SemiCircle extends PlanarShape{
 
     public double calculateArea(){
 
+        // pi*r^2 formula calculates area of circle
         double radius = calculateRadius();
         double area = Math.PI * (radius*radius);
         
+        // semicircle is half that
         return area/2;
     }
 
     public String toString(){
         String line = "SEMI=";
 
-        line += "[" + pointArray[0].toString() + "" + pointArray[1].toString() + "]: " + String.format("%6.2f", calculateArea());
+        line += "[" + pointArray[0].toString() + "" + pointArray[1].toString() + "]: " + String.format("%6.2f", calculateArea());       // concatenate line
+
         return line;
     }
 
@@ -51,21 +56,31 @@ public class SemiCircle extends PlanarShape{
 		// declaring and instantiating variable
 		final int q = p - 1;
 
-		if (p == 0){ 																				// no existing points means the first point will be set as point closest to origin of polygon
-			setLowestFromOrigin(pointArray[p].distanceFromOrigin());
-		} else if (pointArray[p].distanceFromOrigin() < pointArray[q].distanceFromOrigin()){ 		// comparing new point to previous point and set as point closest to origin of polygon
-			setLowestFromOrigin(pointArray[p].distanceFromOrigin());
+        // case1: no existing points
+		if (p == 0){
+			setLowestFromOrigin(pointArray[p].distanceFromOrigin());        // first point will be set as point closest to origin of polygon
+        } 
+
+        // case2: comparing new point to previous point
+        else if (pointArray[p].distanceFromOrigin() < pointArray[q].distanceFromOrigin()){
+			setLowestFromOrigin(pointArray[p].distanceFromOrigin());        // set as point closest to origin of polygon
 		}
     }
 
     public double originDistance(){
-        // distance = (distance from origin of the closest of the two data points) + (2 of the base extremedity points (x2, y2),  (x3, y3)  )
         
+        // case1: comparing extremidity point to lowest from origin
         if(pointArray[2].distanceFromOrigin() < pointLowestFromOrigin){
             pointLowestFromOrigin = pointArray[2].distanceFromOrigin();
-        }else if(pointArray[3].distanceFromOrigin() < pointLowestFromOrigin){
+        }
+        
+        // case2: compariding extremedity point to lowest from origin
+        else if(pointArray[3].distanceFromOrigin() < pointLowestFromOrigin){
             pointLowestFromOrigin = pointArray[3].distanceFromOrigin();
-        }else{
+        }
+        
+        // case3L assume both extremedity points were not lowest from origin
+        else{
             return pointLowestFromOrigin;
         }
 
