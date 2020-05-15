@@ -66,13 +66,11 @@ class PA2{
 				else if(newText.equals("S")){
 					// new semicircle
 					PlanarShape semiCircleObject = new SemiCircle();
-					final Point[] pointArray = new Point[2];
 
 					// inserting points
 					for(int i = 0; i < 2; i++){
 						double x = file.nextDouble();
 						double y = file.nextDouble();
-						pointArray[i] = new Point(x, y);
 						semiCircleObject.insertPoint(x, y);
 					}
 
