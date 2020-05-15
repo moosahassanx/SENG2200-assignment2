@@ -35,7 +35,7 @@ public class SemiCircle extends PlanarShape{
     public String toString(){
         String line = "SEMI=";
 
-        line += "[" + pointArray[0].toString() + " " + pointArray[1].toString() + "]: " + String.format("%6.2f", calculateArea());
+        line += "[" + pointArray[0].toString() + "" + pointArray[1].toString() + "]: " + String.format("%6.2f", calculateArea());
         return line;
     }
 
