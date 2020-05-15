@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 // DATE:                    22/03/2020 
 // DESCRIPTION:             linked list class to manipulate nodes
 
-public class LinkedList<T> implements Iterable<T> {
+public class LinkedList<T extends PlanarShape> implements Iterable<T> {
     // declare private variables
     private Node<T> sentinel;
     private int length;
@@ -65,8 +65,13 @@ public class LinkedList<T> implements Iterable<T> {
         // loop for each node
         Iterator<T> iterator = iterator();
 
+        if(sentinel == null){
+            return printer;
+        }
+        
         printer += sentinel.getData().toString();
         printer += "\n";
+        
 
         while(iterator.hasNext()){
             printer += iterator.next().toString();
@@ -111,61 +116,45 @@ public class LinkedList<T> implements Iterable<T> {
         length++;
     }
 
-    
-    // CAN FOCUS ON THIS AFTER EVERYTHING ELSE IS DONE!
-    public LinkedList<T> insertSort() {
-        System.out.println("Sorted List:");
+    public void insertOrdered(T shape){
 
-        LinkedList<T> sortedList = new LinkedList<T>();
+        Node<T> newNode = new Node<T>(shape);
 
-        Node<T> current = sentinel;
-
-        // THIS WILL CAUSE NULL POINTER EXCEPTION BUT BRUH IM STILL WORKING ON IT
-
-        /*
-        // iterate through unsorted list
-        for (int i = 0; i < length; i++) {
-            // current = sentinel but for sorted list
-            sortedList.reset();
-
-            // case1: no nodes in sorted list
-            if (sortedList.getLength() == 0) {
-                sortedList.append(sentinel.getData());      // simply add to the list
-            }
-
-            // case2: node being added is less than the first node in the list
-            else if (current.getData().compareTo(sortedList.current.getData()) == 1) {
-                sortedList.prepend(current.getData());                                      // add before the current node int he list
-            }
-
-            // case3:
-            else {
-                sortedList.next(); // go to node after current (sentinel)
-
-                // iterate through what is currently in the sorted list
-                for (int j = 1; j < sortedList.getLength(); j++) {
-                    // node being added is less than the node being tested in the sorted list
-                    if (current.getData().compareTo(sortedList.getCurrent()) == 1) {
-                        break;
-                    }
-
-                    else {
-                        sortedList.next(); // iterate to next node
-                    }
-                }
-
-                // insert before the node being tested
-                sortedList.insert(current.getData());
-            }
-
-            // test next node
-            next();
+        // SENTINEL MUST ALWAYS BE NULL AND MUST BE AT TOP OF THE LIST AT ALL TIMES
+        // case: there are no nodes in the list
+        if(sentinel == null){
+            sentinel = newNode;
+            newNode.setNext(newNode);
+            newNode.setPrevious(newNode);
         }
-        */
 
-        // return new list
-        return sortedList;
+        Node<T> afterNode = sentinel.getNext();
+
+        // iterate through list until iterator finds node with greater value and assign afterNode
+        while(afterNode != sentinel && afterNode.getData().compareTo(newNode.getData()) == 1){
+            afterNode = afterNode.getNext();
+        }
+
+        // case: afterNode is the sentinel (full loop) AND afterNode value is equal to / greater than newNode
+        if(afterNode == sentinel && afterNode.getData().compareTo(newNode.getData()) > 0){
+            newNode.setData(sentinel.getData());
+            sentinel.setData(shape);
+        }
+
+        // place newNode before afterNode
+        Node<T> temp = afterNode.getPrevious();
+        afterNode.setPrevious(newNode);
+        newNode.setPrevious(temp);
+        newNode.setNext(afterNode);
+        temp.setNext(newNode);
     }
+
+    /*
+    JOSHS SUGGESTION:
+    go back through and fuck around with it
+    - afterNode == sentinel is wrong
+    - trust in the sentinel null
+    */
 
     // • take (then remove) an item from the head of the list
     public T remove() {
