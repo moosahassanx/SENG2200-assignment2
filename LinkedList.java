@@ -125,7 +125,7 @@ public class LinkedList<T extends PlanarShape> implements Iterable<T> {
         Node<T> newNode = new Node<T>(shape);        
         Node<T> afterNode = sentinel.getNext();
 
-        // iterate through list until full loop && node with greater value has been found
+        // iterate through list until full loop && node with greater value has been found        
         while(afterNode != sentinel && afterNode.getData().compareTo(newNode.getData()) < 1){
             afterNode = afterNode.getNext();
         }
