@@ -13,13 +13,13 @@ class PA2{
 	public static void main(final String[] args) throws IOException {
 		final LinkedList<PlanarShape> unsortedList = new LinkedList<PlanarShape>();			// unsorted linked list
 		final LinkedList<PlanarShape> sortedList = new LinkedList<PlanarShape>();			// sorted linked list
-		final Scanner file = new Scanner(new File(args[0]));		// EXECUTE: java PA2 inputfile.txt
+		final Scanner file = new Scanner(new File(args[0]));								// EXECUTE: java PA2 inputfile.txt
 		String newText = "";
 
 		try {
 			// scanner keeps looking for next character
 			while (file.hasNext()) {
-				newText = file.next();							// declare string and assign input
+				newText = file.next();		// declare string and assign input
 
 				// case1: scanner detects polygon
 				if (newText.equals("P")) {
@@ -45,13 +45,6 @@ class PA2{
 					// inserting into linked list
 					unsortedList.append(polygonObject);				// append polygon object into linked list
 					sortedList.insertOrdered(polygonObject);
-
-
-					// testing
-					System.out.println("TEMP UNSORTED:");
-					System.out.println(unsortedList.toString());
-					System.out.println("TEMP SORTED:");
-					System.out.println(sortedList.toString());
 				}
 
 				// case2: scanner detects circle
@@ -67,12 +60,6 @@ class PA2{
 					// inserting into linked list
 					unsortedList.append(circleObject);				// append circle object into linked list
 					sortedList.insertOrdered(circleObject);
-
-					// testing
-					System.out.println("TEMP UNSORTED:");
-					System.out.println(unsortedList.toString());
-					System.out.println("TEMP SORTED:");
-					System.out.println(sortedList.toString());
 				}
 
 				// case3: scanner detects semicircle
@@ -92,30 +79,22 @@ class PA2{
 					// inserting into linked list
 					unsortedList.append(semiCircleObject);				// append semicircle object into linked list
 					sortedList.insertOrdered(semiCircleObject);
-
-
-					// testing
-					System.out.println("TEMP UNSORTED:");
-					System.out.println(unsortedList.toString());
-					System.out.println("TEMP SORTED:");
-					System.out.println(sortedList.toString());
 				}
 			}
-		} catch (final Exception e) {
+		} 
+		// file reading error
+		catch (final Exception e) {
 			System.out.println("FILE ERROR: " + e);
 		}
 
 		file.close();		// close file (good practice)
 
-		/*
 		// print unsorted list
 		System.out.println("Unsorted List:");
 		System.out.println(unsortedList.toString());
 
 		// print sorted list
-		//final LinkedList<PlanarShape> sortedList = unsortedList.insertSort();
 		System.out.println("Sorted List:");
 		System.out.println(sortedList.toString());
-		*/
 	}
 }
