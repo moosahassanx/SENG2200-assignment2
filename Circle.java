@@ -2,32 +2,33 @@
 
 public class Circle extends PlanarShape{
 
+    // declaring variables and objects
     private final Point[] pointArray = new Point[1];
     private double radius;
 
+    // constructor
     public Circle(double r) {
+        // instantiating
         radius = r;
 	}
 
 	public double calculateArea(){
         // method use area = pi * radius squared
         double area;
-
         area = 3.14159265359 * (radius*radius);
-
         return area;
     }
 
     public double originDistance(){
         // distance = (distance from origin of centre) - (radius of circle, which can be negative)
         double originDistance = pointArray[0].distanceFromOrigin() - Math.abs(radius);
-
         return originDistance;
     }
 
     public String toString(){
         String line = "CIRC=";
 
+        // concatenate line
         line += "[" + pointArray[0].toString() + " " + radius + "]: " + String.format("%6.2f", calculateArea());
 
         return line;
