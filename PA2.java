@@ -12,6 +12,7 @@ import java.util.Scanner;
 class PA2{
 	public static void main(final String[] args) throws IOException {
 		final LinkedList<PlanarShape> unsortedList = new LinkedList<PlanarShape>();			// unsorted linked list
+		final LinkedList<PlanarShape> sortedList = new LinkedList<PlanarShape>();			// sorted linked list
 		final Scanner file = new Scanner(new File(args[0]));		// EXECUTE: java PA2 inputfile.txt
 		String newText = "";
 
@@ -40,8 +41,17 @@ class PA2{
 						j++;
 						i++;
 					}
-					
+
+					// inserting into linked list
 					unsortedList.append(polygonObject);				// append polygon object into linked list
+					sortedList.insertOrdered(polygonObject);
+
+
+					// testing
+					System.out.println("TEMP UNSORTED:");
+					System.out.println(unsortedList.toString());
+					System.out.println("TEMP SORTED:");
+					System.out.println(sortedList.toString());
 				}
 
 				// case2: scanner detects circle
@@ -54,8 +64,15 @@ class PA2{
 					PlanarShape circleObject  = new Circle(r);
 					circleObject.insertPoint(x, y);
 
-					// for testing
+					// inserting into linked list
 					unsortedList.append(circleObject);				// append circle object into linked list
+					sortedList.insertOrdered(circleObject);
+
+					// testing
+					System.out.println("TEMP UNSORTED:");
+					System.out.println(unsortedList.toString());
+					System.out.println("TEMP SORTED:");
+					System.out.println(sortedList.toString());
 				}
 
 				// case3: scanner detects semicircle
@@ -72,8 +89,16 @@ class PA2{
 						semiCircleObject.insertPoint(x, y);
 					}
 
-					// for testing
+					// inserting into linked list
 					unsortedList.append(semiCircleObject);				// append semicircle object into linked list
+					sortedList.insertOrdered(semiCircleObject);
+
+
+					// testing
+					System.out.println("TEMP UNSORTED:");
+					System.out.println(unsortedList.toString());
+					System.out.println("TEMP SORTED:");
+					System.out.println(sortedList.toString());
 				}
 			}
 		} catch (final Exception e) {
@@ -82,36 +107,15 @@ class PA2{
 
 		file.close();		// close file (good practice)
 
+		/*
 		// print unsorted list
 		System.out.println("Unsorted List:");
 		System.out.println(unsortedList.toString());
 
 		// print sorted list
-		final LinkedList<PlanarShape> sortedList = unsortedList.insertSort();
+		//final LinkedList<PlanarShape> sortedList = unsortedList.insertSort();
+		System.out.println("Sorted List:");
 		System.out.println(sortedList.toString());
+		*/
 	}
 }
-
-/* INPUT
-P 5 4.0 0 4 8.1 7.2 8 7 3 9 0
-C 5.1 4.0 3.2
-S 4 3 5.0 4.0
-*/
-
-/* OUTPUT
-Unsorted list
-SEMI=[(4.00 , 3.00)(5.00 , 4.00)]: 39.27
-CIRC=[(5.10 , 4.00)) 3.20]: 32.17
-POLY=[(4.00 , 0.00)(4.00 , 8.10)(7.20 , 8.00)(7.00 , 3.00)(9.00 , 0.00)]: 27.66
-Sorted list
-POLY=[(4.00 , 0.00)(4.00 , 8.10)(7.20 , 8.00)(7.00 , 3.00)(9.00 , 0.00)]: 27.66
-CIRC=[(5.10 , 4.00)) 3.20]: 32.17
-SEMI=[(4.00 , 3.00)(5.00 , 4.00)]: 39.27
-*/
-
-/*
-semi circle x0 y0 x1 y1
-
-x0 & y0 represent the coordinates of where the centre of the circle is
-x1 % y1 represent the radius of the circle
-*/
