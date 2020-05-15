@@ -6,8 +6,10 @@ public abstract class PlanarShape implements Comparable<PlanarShape>{
     public abstract double originDistance();
 	public abstract void insertPoint(double x, double y);
     
+    @Override
     public int compareTo(PlanarShape data){
-        
+        // TO DO: add ratio comparison
+
         // case1: the new shape is smaller than the previous shape
         if(this.calculateArea() > data.calculateArea()){
             return -1;
