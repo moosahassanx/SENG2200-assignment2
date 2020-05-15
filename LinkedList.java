@@ -2,17 +2,18 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-// TITLE:                   Assignment1
+// TITLE:                   Assignment2
 // COURSE:                  SENG2200
 // AUTHOR:                  Moosa Hassan
 // STUDENT NUMBER:          3331532 
-// DATE:                    22/03/2020 
+// DATE:                    15/05/2020 
 // DESCRIPTION:             linked list class to manipulate nodes
 
 public class LinkedList<T extends PlanarShape> implements Iterable<T> {
     // declare private variables
     private Node<T> sentinel;
     private int length;
+
     private class SimpleIterator implements Iterator<T>{
         private int expectedModCount;
         private Node<T> current;
@@ -24,16 +25,20 @@ public class LinkedList<T extends PlanarShape> implements Iterable<T> {
             current = sentinel;
         }
 
-        // no preconditions
+        // check existence of next element
         public boolean hasNext() {
+            // case1: node after current is not sentinel
             if(current.getNext() != sentinel){
                 return true;
-            }else{
+            }
+            
+            // case2: node after current is sentinel (full loop)
+            else{
                 return false;
             }
         }
 
-        // 2 preconditions: returns true and ________
+        // based off lecture slides
         public T next() {
 
             if(length != expectedModCount){
@@ -53,7 +58,9 @@ public class LinkedList<T extends PlanarShape> implements Iterable<T> {
     // the one with an object of polygon being passed through
     public LinkedList() {
         // instantiate private variables
-        sentinel = null;
+        sentinel = new Node<T>(null);
+        sentinel.setNext(sentinel);
+        sentinel.setPrevious(sentinel);
         length = 0;
     }
 
@@ -65,14 +72,7 @@ public class LinkedList<T extends PlanarShape> implements Iterable<T> {
         // loop for each node
         Iterator<T> iterator = iterator();
 
-        if(sentinel == null){
-            return printer;
-        }
-        
-        printer += sentinel.getData().toString();
-        printer += "\n";
-        
-
+        // check existence of next element
         while(iterator.hasNext()){
             printer += iterator.next().toString();
             printer += "\n";
@@ -96,15 +96,18 @@ public class LinkedList<T extends PlanarShape> implements Iterable<T> {
         // create new temp node
         Node<T> temp = new Node<T>(shape);
 
-        if (length == 0) { // no nodes exist
+        // case1: no nodes exist
+        if (length == 0) { 
             // sentinel becomes temp
             sentinel = temp;
 
             // setting next and previous for sentinel
             sentinel.setNext(sentinel);
             sentinel.setPrevious(sentinel);
+        } 
 
-        } else { // 1 or more nodes exist
+        // case2: 1 or more nodes exist
+        else { 
             temp.setNext(sentinel);
             temp.setPrevious(sentinel.getPrevious());
 
@@ -113,52 +116,34 @@ public class LinkedList<T extends PlanarShape> implements Iterable<T> {
             sentinel.setPrevious(temp);
 
         }
-        length++;
+        length++;       // increment length counter
     }
 
     public void insertOrdered(T shape){
 
-        Node<T> newNode = new Node<T>(shape);
-
-        // SENTINEL MUST ALWAYS BE NULL AND MUST BE AT TOP OF THE LIST AT ALL TIMES
-        // case: there are no nodes in the list
-        if(sentinel == null){
-            sentinel = newNode;
-            newNode.setNext(newNode);
-            newNode.setPrevious(newNode);
-        }
-
+        // declaring required nodes
+        Node<T> newNode = new Node<T>(shape);        
         Node<T> afterNode = sentinel.getNext();
 
-        // iterate through list until iterator finds node with greater value and assign afterNode
-        while(afterNode != sentinel && afterNode.getData().compareTo(newNode.getData()) == 1){
+        // iterate through list until full loop && node with greater value has been found
+        while(afterNode != sentinel && afterNode.getData().compareTo(newNode.getData()) < 1){
             afterNode = afterNode.getNext();
         }
 
-        // case: afterNode is the sentinel (full loop) AND afterNode value is equal to / greater than newNode
-        if(afterNode == sentinel && afterNode.getData().compareTo(newNode.getData()) > 0){
-            newNode.setData(sentinel.getData());
-            sentinel.setData(shape);
-        }
-
-        // place newNode before afterNode
-        Node<T> temp = afterNode.getPrevious();
+        // insert before
+        newNode.setPrevious(afterNode.getPrevious());
+        afterNode.getPrevious().setNext(newNode);
         afterNode.setPrevious(newNode);
-        newNode.setPrevious(temp);
         newNode.setNext(afterNode);
-        temp.setNext(newNode);
+        
+        // incrementing counter
+        length++;
     }
-
-    /*
-    JOSHS SUGGESTION:
-    go back through and fuck around with it
-    - afterNode == sentinel is wrong
-    - trust in the sentinel null
-    */
 
     // • take (then remove) an item from the head of the list
     public T remove() {
-        Node<T> current = sentinel.getNext();
+
+        Node<T> current = sentinel.getNext();       // current node
 
         // case1: there are no nodes in the linked list
         if (length == 0) {
@@ -196,11 +181,10 @@ public class LinkedList<T extends PlanarShape> implements Iterable<T> {
         return sentinel.getData();
     }
 
-    // accessor method
     public int getLength() {
         return length;
     }
-
+    
     // iterator method
     public Iterator<T> iterator() {
         return new SimpleIterator();
