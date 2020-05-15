@@ -66,10 +66,14 @@ public class Polygon extends PlanarShape{
 		// declaring and instantiating variable
 		final int q = p - 1;
 
-		if (p == 0){ 																				// no existing points means the first point will be set as point closest to origin of polygon
-			setLowestFromOrigin(pointArray[p].distanceFromOrigin());
-		} else if (pointArray[p].distanceFromOrigin() < pointArray[q].distanceFromOrigin()){ 		// comparing new point to previous point and set as point closest to origin of polygon
-			setLowestFromOrigin(pointArray[p].distanceFromOrigin());
+		// case1: no existing points
+		if (p == 0){
+			setLowestFromOrigin(pointArray[p].distanceFromOrigin());	// first point will be set as point closest to origin of polygon
+		} 
+		
+		// case2: comparing new point to previous point
+		else if (pointArray[p].distanceFromOrigin() < pointArray[q].distanceFromOrigin()){
+			setLowestFromOrigin(pointArray[p].distanceFromOrigin());			// set as point closest to origin of polygon
 		}
 	}
 
@@ -82,6 +86,4 @@ public class Polygon extends PlanarShape{
 	public double originDistance(){
 		return pointLowestFromOrigin;
 	}
-
-	
 }
